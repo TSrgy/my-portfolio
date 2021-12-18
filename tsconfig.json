@@ -1,15 +1,10 @@
 {
+    "extends": "electron-snowpack/config/tsconfig.json",
+    "include": ["src", "types"],
     "compilerOptions": {
-      "module": "commonjs",
-      "noImplicitAny": true,
-      "sourceMap": true,
-      "outDir": "dist",
-      "baseUrl": ".",
-      "paths": {
-        "*": ["node_modules/*"]
+        "baseUrl": ".",
+        "paths": {
+          "@/*": ["src/*"]
+        }
       }
-    },
-    "include": [
-      "src/**/*"
-    ]
-  }
+}
