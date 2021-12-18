@@ -2,12 +2,14 @@
   "name": "my-portfolio",
   "version": "0.1.0",
   "description": "",
-  "main": "main.ts",
+  "main": "src/main.ts",
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
+    "build": "electron-snowpack build",
+    "clean": "electron-snowpack clean",
+    "dev": "electron-snowpack dev",
+    "start": "electron-snowpack dev",
     "lint": "eslint .",
-    "start": "npm run build && electron ./dist/main.js",
+    "dist": "electron-builder",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,12 +26,15 @@
   },
   "homepage": "https://github.com/TSrgy/my-portfolio#readme",
   "devDependencies": {
+    "@snowpack/plugin-react-refresh": "^2.5.0",
     "@types/node": "^16.11.12",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
+    "@types/snowpack-env": "^2.3.4",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
     "electron": "^16.0.4",
+    "electron-snowpack": "^0.12.2",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.3",
@@ -43,5 +48,8 @@
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
+  },
+  "build": {
+    "extends": "electron-snowpack/config/electron-builder.js"
   }
 }
