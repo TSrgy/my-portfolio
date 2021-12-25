@@ -1,3 +1,3 @@
 .eslintrc.js
-snowpack.config.js
+webpack.*.js
 dist/*
