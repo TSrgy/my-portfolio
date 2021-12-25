@@ -2,6 +2,8 @@ import * as React from "react";
 
 import { useEffect, useState } from "react";
 
+import { Header } from "./Header";
+
 const App: React.FC = () => {
     const [count, setCount] = useState<number>(0);
 
@@ -12,7 +14,7 @@ const App: React.FC = () => {
 
     return (
         <div>
-            <p>Hello world</p>
+            <Header />
         </div>
     );
 };
