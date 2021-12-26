@@ -1,11 +1,15 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 
 const main = {
-    entry: "./src/main/index.ts",
+    entry: {
+        main: "./src/main/index.ts"
+    },
     output: {
         path: path.resolve(__dirname, "./dist"),
-        filename: "main.js"
+        filename: "main.js",
+        clean: true
     },
     target: "electron-main",
     resolve: {
@@ -23,13 +27,18 @@ const main = {
 };
 
 const renderer = {
-    entry: "./src/renderer/index.tsx",
+    entry: {
+        rendered: "./src/renderer/index.tsx"
+    },
     output: {
         path: path.resolve(__dirname, "./dist"),
-        filename: "renderer.js"
+        filename: "renderer.js",
     },
     resolve: {
-        extensions: [".tsx", ".ts", "..."]
+        extensions: [".tsx", ".ts", "..."],
+        alias: {
+            "@components": path.resolve(__dirname, "./src/renderer/components")
+        }
     },
     target: "electron-renderer",
     module: {
@@ -38,12 +47,36 @@ const renderer = {
                 test: /\.ts(x?)$/,
                 include: /src/,
                 use: [{ loader: "ts-loader" }]
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader
+                    },
+                    "css-loader",
+                    "sass-loader"
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader
+                    },
+                    "css-loader"
+                ]
             }
         ]
     },
-    plugins: [new HtmlWebpackPlugin({
-        template: "./src/index.html"
-    })]
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: "[name].css"
+        }),
+        new HtmlWebpackPlugin({
+            template: "./src/index.html"
+        })
+    ]
 };
 
 module.exports = { main, renderer };

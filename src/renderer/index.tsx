@@ -3,12 +3,21 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
+import { HashRouter, Route, Routes } from "react-router-dom";
+
 import App from "./components/App";
+import { AssetCreateForm } from "./components/assets/AssetCreateForm";
 
 ReactDOM.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
+    <HashRouter>
+        <React.StrictMode>
+            <Routes>
+                <Route path="/" element={<App />}>
+                    <Route path="/createAsset" element={<AssetCreateForm />}></Route>
+                </Route>
+            </Routes>
+        </React.StrictMode>
+    </HashRouter>,
     document.getElementById("root") as HTMLDivElement
 );
 
