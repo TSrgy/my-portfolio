@@ -1,8 +1,11 @@
 const { merge } = require("webpack-merge");
-const { main, renderer } = require("./webpack.common.js");
+const { main, preload, renderer } = require("./webpack.common.js");
 
 module.exports = [
     merge(main, {
+        mode: "production"
+    }),
+    merge(preload, {
         mode: "production"
     }),
     merge(renderer, {

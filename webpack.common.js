@@ -8,12 +8,40 @@ const main = {
     },
     output: {
         path: path.resolve(__dirname, "./dist"),
-        filename: "main.js",
-        clean: true
+        filename: "main.js"
     },
     target: "electron-main",
     resolve: {
-        extensions: [".ts", "..."]
+        extensions: [".ts", "..."],
+        alias: {
+            "@store": path.resolve(__dirname, "./src/shared/store")
+        }
+    },
+    module: {
+        rules: [
+            {
+                test: /\.ts$/,
+                include: /src/,
+                use: [{ loader: "ts-loader" }]
+            }
+        ]
+    }
+};
+
+const preload = {
+    entry: {
+        preload: "./src/main/preload.ts"
+    },
+    output: {
+        path: path.resolve(__dirname, "./dist"),
+        filename: "preload.js"
+    },
+    target: "electron-preload",
+    resolve: {
+        extensions: [".ts", "..."],
+        alias: {
+            "@store": path.resolve(__dirname, "./src/shared/store")
+        }
     },
     module: {
         rules: [
@@ -37,7 +65,8 @@ const renderer = {
     resolve: {
         extensions: [".tsx", ".ts", "..."],
         alias: {
-            "@components": path.resolve(__dirname, "./src/renderer/components")
+            "@components": path.resolve(__dirname, "./src/renderer/components"),
+            "@store": path.resolve(__dirname, "./src/shared/store")
         }
     },
     target: "electron-renderer",
@@ -79,4 +108,4 @@ const renderer = {
     ]
 };
 
-module.exports = { main, renderer };
+module.exports = { main, preload, renderer };
