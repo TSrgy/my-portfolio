@@ -1,6 +1,11 @@
+import "./App.scss";
+
 import * as React from "react";
 
 import { useEffect, useState } from "react";
+
+import { Header } from "./Header";
+import { Outlet } from "react-router-dom";
 
 const App: React.FC = () => {
     const [count, setCount] = useState<number>(0);
@@ -11,9 +16,10 @@ const App: React.FC = () => {
     }, [count, setCount]);
 
     return (
-        <div>
-            <p>Hello world</p>
-        </div>
+        <>
+            <Header />
+            <Outlet />
+        </>
     );
 };
 
