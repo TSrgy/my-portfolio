@@ -4,6 +4,7 @@ import { Currency, addAsset } from "@store/assetSlice";
 import { ItemRenderer, Select } from "@blueprintjs/select";
 import React, { useState } from "react";
 
+import { showSuccesToast } from "@components/common/Toasters";
 import { useDispatch } from "react-redux";
 
 const CurrencySelect = Select.ofType<Currency>();
@@ -50,9 +51,10 @@ export const AssetCreateForm: React.FC = () => {
                 amount: amount || 0,
                 currency: currency,
                 price: price || 0,
-                id: 12
+                id: 0
             })
         );
+        showSuccesToast("A new asset is added");
     };
 
     return (

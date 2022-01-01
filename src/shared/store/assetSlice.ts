@@ -30,7 +30,14 @@ export const assetSlice = createSlice({
     initialState,
     reducers: {
         addAsset: (state, { payload }: PayloadAction<Asset>) => {
-            assetsAdapter.addOne(state.assets, payload);
+            const ids = assetsAdapter
+                .getSelectors()
+                .selectIds(state.assets)
+                .map((id) => <number>id);
+
+            const newId = Math.max(...ids) + 1;
+
+            assetsAdapter.addOne(state.assets, { ...payload, id: newId });
         }
     }
 });
