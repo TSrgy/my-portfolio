@@ -2,17 +2,18 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 import { HashRouter, Route, Routes } from "react-router-dom";
-import { IAppState, configureAppStore } from "@store/index";
+import { RootState, configureAppStore } from "@store/index";
 
 import App from "./components/App";
 import { AssetCreateForm } from "./components/assets/AssetCreateForm";
+import { AssetList } from "@components/assets/AssetList";
 import { Provider } from "react-redux";
 
 declare global {
     interface Window {
         api: {
-            getStateAsync: () => Promise<IAppState>;
-            saveStateAsync: (state: IAppState) => Promise<void>;
+            getStateAsync: () => Promise<RootState>;
+            saveStateAsync: (state: RootState) => Promise<void>;
         };
     }
 }
@@ -33,7 +34,9 @@ declare global {
                 <HashRouter>
                     <Routes>
                         <Route path="/" element={<App />}>
-                            <Route path="/createAsset" element={<AssetCreateForm />}></Route>
+                            <Route index element={<AssetList />}></Route>
+                            <Route path="assetList" element={<AssetList />}></Route>
+                            <Route path="createAsset" element={<AssetCreateForm />}></Route>
                         </Route>
                     </Routes>
                 </HashRouter>

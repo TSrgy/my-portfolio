@@ -1,11 +1,11 @@
 import { EnhancedStore, configureStore } from "@reduxjs/toolkit";
 import assetSlice, { AssetsState } from "./assetSlice";
 
-export interface IAppState {
+export interface RootState {
     assets: AssetsState;
 }
 
-export function configureAppStore(initialState: IAppState): EnhancedStore<IAppState> {
+export function configureAppStore(initialState: RootState): EnhancedStore<RootState> {
     const store = configureStore({
         reducer: {
             assets: assetSlice

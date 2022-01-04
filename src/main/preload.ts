@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from "electron";
 
-import { IAppState } from "@store/index";
+import { RootState } from "@store/index";
 
 contextBridge.exposeInMainWorld("api", {
     getStateAsync: async () => {
@@ -8,7 +8,7 @@ contextBridge.exposeInMainWorld("api", {
         return await ipcRenderer.invoke("get-state");
     },
 
-    saveStateAsync: async (state: IAppState) => {
+    saveStateAsync: async (state: RootState) => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return await ipcRenderer.invoke("save-state", state);
     }
