@@ -8,9 +8,9 @@ export const Header: React.FC = () => {
     return (
         <Navbar>
             <Navbar.Group align="left">
-                <Navbar.Heading>My portfolio</Navbar.Heading>
-                <Navbar.Divider />
-
+                <Link to="/assetList">
+                    <Button icon="briefcase">Assets</Button>
+                </Link>
                 <Link to="/createAsset">
                     <Button icon="cube-add">Add new asset</Button>
                 </Link>

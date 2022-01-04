@@ -2,12 +2,12 @@
 
 import { BrowserWindow, app, dialog, ipcMain } from "electron";
 
-import { IAppState } from "@store/index";
+import { RootState } from "@store/index";
 import jsonStorage from "electron-json-storage";
 import path from "path";
 
 let mainWindow: BrowserWindow | null | undefined;
-let state: IAppState;
+let state: RootState;
 
 function createMainWindow(): BrowserWindow {
     ipcMain.handle("get-state", (_event, _arg) => {
@@ -43,18 +43,18 @@ function createMainWindow(): BrowserWindow {
 }
 
 async function start() {
-    const loadState = new Promise<IAppState>((resolve, reject) => {
+    const loadState = new Promise<RootState>((resolve, reject) => {
         jsonStorage.get("state", (error, data) => {
             if (error) {
                 reject(error);
             } else {
-                resolve(data as IAppState);
+                resolve(data as RootState);
             }
         });
     });
     state = await loadState;
 
-    ipcMain.handle("save-state", (_event, state: IAppState) => {
+    ipcMain.handle("save-state", (_event, state: RootState) => {
         jsonStorage.set("state", state, (error) => {
             if (error) {
                 throw error;
