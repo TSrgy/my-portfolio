@@ -3,10 +3,11 @@ import { Col, Container, Row } from "react-grid-system";
 
 import { Asset } from "@store/assetSlice";
 import React from "react";
-import { RootState } from "@store/index";
+import { RootState } from "@store";
 import { useSelector } from "react-redux";
 
 export const AssetList: React.FC = () => {
+    const currencies = useSelector((state: RootState) => state.currencies.currencies.entities);
     const assets = useSelector((state: RootState) => state.assets.assets);
 
     const renderAssetItem = (asset: Asset) => {
@@ -14,7 +15,7 @@ export const AssetList: React.FC = () => {
             <Card interactive={true} elevation={Elevation.TWO}>
                 <h5>{asset.name}</h5>
                 <p>Amount: {asset.amount}</p>
-                <p>Currency: {asset.currency.name}</p>
+                <p>Currency: {currencies[asset.currencyId]}</p>
                 <p>Price: {asset.price}</p>
             </Card>
         );

@@ -18,6 +18,7 @@
         "baseUrl": "./",
         "paths": {
             "@components/*": ["src/renderer/components/*"],
+            "@store": ["src/shared/store/index.ts"],
             "@store/*": ["src/shared/store/*"]
         }
     },

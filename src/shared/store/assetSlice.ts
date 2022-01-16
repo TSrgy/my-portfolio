@@ -1,14 +1,12 @@
 import { EntityState, PayloadAction, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { CurrencyId } from "./currencySlice";
 
-export interface Currency {
-    name: string;
-    oneDollarPrice: number;
-}
+export type AssetId = number;
 
 export interface Asset {
-    id: number;
+    id: AssetId;
     name: string;
-    currency: Currency;
+    currencyId: CurrencyId;
     price: number;
     amount: number;
 }
@@ -45,4 +43,4 @@ export const assetSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { addAsset } = assetSlice.actions;
 
-export default assetSlice.reducer;
+export const assetReducer = assetSlice.reducer;

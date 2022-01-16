@@ -5,8 +5,8 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import { RootState, configureAppStore } from "@store/index";
 
 import App from "./components/App";
-import { AssetCreateForm } from "./components/assets/AssetCreateForm";
-import { AssetList } from "@components/assets/AssetList";
+import { AssetCreateForm } from "./components/asset/AssetCreateForm";
+import { AssetList } from "@components/asset/AssetList";
 import { Provider } from "react-redux";
 
 declare global {

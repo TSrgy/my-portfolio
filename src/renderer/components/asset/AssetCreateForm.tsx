@@ -1,28 +1,15 @@
 import { Button, ControlGroup, FormGroup, InputGroup, MenuItem, NumericInput } from "@blueprintjs/core";
 import { Col, Container, Row } from "react-grid-system";
-import { Currency, addAsset } from "@store/assetSlice";
 import { ItemRenderer, Select } from "@blueprintjs/select";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
+import { Currency } from "@store/currencySlice";
+import { RootState } from "@store/index";
+import { addAsset } from "@store/assetSlice";
 import { showSuccesToast } from "@components/common/Toasters";
-import { useDispatch } from "react-redux";
 
 const CurrencySelect = Select.ofType<Currency>();
-
-const currencies: Currency[] = [
-    {
-        name: "USD",
-        oneDollarPrice: 1
-    },
-    {
-        name: "EUR",
-        oneDollarPrice: 0.88
-    },
-    {
-        name: "RUB",
-        oneDollarPrice: 73.66
-    }
-];
 
 const currencyRenderer: ItemRenderer<Currency> = (asset, { handleClick, modifiers }) => {
     return (
@@ -38,6 +25,7 @@ const currencyRenderer: ItemRenderer<Currency> = (asset, { handleClick, modifier
 };
 
 export const AssetCreateForm: React.FC = () => {
+    const currencies = useSelector((state: RootState) => Object.values(state.currencies.currencies.entities)) as Currency[];
     const [currency, setCurrency] = useState<Currency>(currencies[0]);
     const [assetName, setAssetName] = useState<string>("");
     const [price, setPrice] = useState<number>();
@@ -49,7 +37,7 @@ export const AssetCreateForm: React.FC = () => {
             addAsset({
                 name: assetName,
                 amount: amount || 0,
-                currency: currency,
+                currencyId: currency.id,
                 price: price || 0,
                 id: 0
             })
@@ -69,6 +57,7 @@ export const AssetCreateForm: React.FC = () => {
                             <CurrencySelect
                                 items={currencies}
                                 filterable={false}
+                                activeItem={currency}
                                 onItemSelect={(c) => setCurrency(c)}
                                 itemRenderer={currencyRenderer}
                                 noResults={<MenuItem disabled={true} text="No results." />}
