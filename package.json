@@ -1,5 +1,5 @@
 {
-  "name": "my-portfolio",
+  "name": "pchart",
   "version": "0.1.0",
   "description": "",
   "main": "src/main.ts",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TSrgy/my-portfolio.git"
+    "url": "git+https://github.com/TSrgy/pchart.git"
   },
   "keywords": [
     "portfolio"
@@ -21,9 +21,9 @@
   "author": "TSrgy",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/TSrgy/my-portfolio/issues"
+    "url": "https://github.com/TSrgy/pchart/issues"
   },
-  "homepage": "https://github.com/TSrgy/my-portfolio#readme",
+  "homepage": "https://github.com/TSrgy/pchart#readme",
   "devDependencies": {
     "@snowpack/plugin-react-refresh": "^2.5.0",
     "@types/electron-json-storage": "^4.5.0",
